@@ -50,10 +50,15 @@ class Solution:
             #return type: int dictionary
             
             #TODO: Write code below to return a dictionary with the solution to the prompt.
-            dic = [0: (0, 0), (0, 0): 0, 1: (1, 0), (1, 0): 1, 2: (2, 0), (2, 0): 2, 3: (0, 1), (0, 1): 3, 4: (1, 1), (1, 1): 4, 5: (2, 1),
-(2, 1): 5, 6: (0, 2), (0, 2): 6, 7: (1, 2), (1, 2): 7, 8: (2, 2), (2, 2): 8]
-            if num_players == 2 and num_actions == 3:
-                return dic
+            # actions ^ players
+            out = {}
+            # fill cur with 0s
+            for i in range(num_actions ** num_players):
+                out[i] = ()
+                for j in range(num_players):
+                    out[i] += (i // (num_actions ** j) % num_actions,)
+                out[out[i]] = i
+            return out
     
 def main():
     input1 = input()
@@ -66,6 +71,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
